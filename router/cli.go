@@ -7,5 +7,6 @@ import (
 
 func init() {
 	g.Server().BindHandler("/cli/*path", cli.Index)
+	g.Server().BindHandler("/cli/check", cli.Check)
 	g.Server().BindHandler("/cli/download", cli.Download)
 }
