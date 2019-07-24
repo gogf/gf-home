@@ -1,4 +1,4 @@
-package s_document
+package document
 
 import (
     "fmt"

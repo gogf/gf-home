@@ -20,6 +20,10 @@ https-port  = 443
     path  = "/home/john/Workspace/Go/gf-doc2"
     hook  = "pass"
 
+# CLI二进制文件
+[cli]
+    path  = "D:/Workspace/Go/GOPATH/src/github.com/gogf/gf-cli/bin"
+
 # CDN配置
 [cdn]
     url     = "https://cdn.goframe.org"

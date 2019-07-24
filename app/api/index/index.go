@@ -1,4 +1,4 @@
-package api_index
+package index
 
 import (
 	"github.com/gogf/gf/g/net/ghttp"
