@@ -23,10 +23,6 @@ func init() {
 
 // CLI二进制文件浏览
 func Index(r *ghttp.Request) {
-	if r.Get("path") == "" {
-		r.Response.WriteStatus(404)
-		r.Exit()
-	}
 	r.Response.ServeFile(cliRoot+"/"+r.Get("path"), true)
 }
 
@@ -35,7 +31,7 @@ func Index(r *ghttp.Request) {
 func Check(r *ghttp.Request) {
 	inputMd5 := r.Get("md5")
 	if inputMd5 == "" {
-		r.Response.Write("need client md5 value")
+		r.Response.Write("md5 value cannot be empty")
 		return
 	}
 	path := getFilePath(r)
@@ -45,7 +41,7 @@ func Check(r *ghttp.Request) {
 			return nil
 		}
 		return s
-	}, time.Minute)
+	}, time.Hour)
 	if md5 == nil {
 		r.Response.Write("invalid params")
 		return
@@ -59,6 +55,8 @@ func Check(r *ghttp.Request) {
 
 // CLI二进制文件下载
 func Download(r *ghttp.Request) {
+	glog.Cat("cli/download").Println(r.GetMap())
+
 	path := getFilePath(r)
 	r.Response.ServeFileDownload(path, gfile.Basename(path))
 }
@@ -70,5 +68,5 @@ func getFilePath(r *ghttp.Request) string {
 	if os == "windows" {
 		name += ".exe"
 	}
-	return cliRoot + "/" + r.Get("path") + fmt.Sprintf(`latest/%s_%s/%s`, os, arch, name)
+	return cliRoot + "/" + r.Get("path") + fmt.Sprintf(`%s_%s/%s`, os, arch, name)
 }
