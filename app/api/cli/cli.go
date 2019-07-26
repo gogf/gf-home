@@ -56,7 +56,7 @@ func buildBinaryPath(r *ghttp.Request) string {
 	if os == "windows" {
 		name += ".exe"
 	}
-	return cliRoot + "/" + r.Get("path") + fmt.Sprintf(`latest/%s_%s/%s`, os, arch, name)
+	return gfile.Abs(cliRoot + "/" + r.Get("path") + fmt.Sprintf(`%s_%s/%s`, os, arch, name))
 }
 
 // 刷新文件md5缓存
