@@ -20,9 +20,13 @@ https-port  = 443
     path  = "/home/john/Workspace/Go/gf-doc2"
     hook  = "pass"
 
+# 初始化项目配置
+[project]
+    url  = "https://github.com/gogf/gf-empty/archive/master.zip"
+
 # CLI二进制文件
 [cli]
-    path  = "D:/Workspace/Go/GOPATH/src/github.com/gogf/gf-cli/bin"
+    path = "D:/Workspace/Go/GOPATH/src/github.com/gogf/gf-cli/bin"
 
 # CDN配置
 [cdn]
