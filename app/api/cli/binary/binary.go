@@ -1,4 +1,4 @@
-package cli
+package binary
 
 import (
 	"fmt"
@@ -73,7 +73,7 @@ func refreshCacheMap() {
 
 // 刷新文件列表缓存
 func refreshFilesSet() {
-	files, err := gfile.ScanDir(cliRoot, "*.*", true)
+	files, err := gfile.ScanDirFile(cliRoot, "*", true)
 	if err != nil {
 		glog.Error(err)
 	} else {

@@ -24,6 +24,11 @@ https-port  = 443
 [project]
     url  = "https://github.com/gogf/gf-empty/archive/master.zip"
 
+# 版本管理地址
+[git]
+	gitee  = "https://gitee.com/johng/gf"
+	github = "https://github.com/gogf/gf"
+
 # CLI二进制文件
 [cli]
     path = "D:/Workspace/Go/GOPATH/src/github.com/gogf/gf-cli/bin"
