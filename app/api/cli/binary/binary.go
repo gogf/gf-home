@@ -2,14 +2,14 @@ package binary
 
 import (
 	"fmt"
-	"github.com/gogf/gf/g"
-	"github.com/gogf/gf/g/container/gmap"
-	"github.com/gogf/gf/g/container/gset"
-	"github.com/gogf/gf/g/crypto/gmd5"
-	"github.com/gogf/gf/g/net/ghttp"
-	"github.com/gogf/gf/g/os/gfile"
-	"github.com/gogf/gf/g/os/glog"
-	"github.com/gogf/gf/g/os/gtimer"
+	"github.com/gogf/gf/container/gmap"
+	"github.com/gogf/gf/container/gset"
+	"github.com/gogf/gf/crypto/gmd5"
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/net/ghttp"
+	"github.com/gogf/gf/os/gfile"
+	"github.com/gogf/gf/os/glog"
+	"github.com/gogf/gf/os/gtimer"
 	"time"
 )
 

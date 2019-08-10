@@ -2,7 +2,7 @@ package router
 
 import (
 	"github.com/gogf/gf-home/app/api/document"
-	"github.com/gogf/gf/g"
+	"github.com/gogf/gf/frame/g"
 )
 
 func init() {

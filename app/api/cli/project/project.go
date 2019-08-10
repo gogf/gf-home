@@ -1,12 +1,12 @@
 package project
 
 import (
-	"github.com/gogf/gf/g"
-	"github.com/gogf/gf/g/crypto/gmd5"
-	"github.com/gogf/gf/g/net/ghttp"
-	"github.com/gogf/gf/g/os/gcache"
-	"github.com/gogf/gf/g/os/glog"
-	"github.com/gogf/gf/g/os/gtimer"
+	"github.com/gogf/gf/crypto/gmd5"
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/net/ghttp"
+	"github.com/gogf/gf/os/gcache"
+	"github.com/gogf/gf/os/glog"
+	"github.com/gogf/gf/os/gtimer"
 	"time"
 )
 

@@ -4,7 +4,7 @@ import (
 	"github.com/gogf/gf-home/app/api/cli/binary"
 	"github.com/gogf/gf-home/app/api/cli/project"
 	"github.com/gogf/gf-home/app/api/cli/version"
-	"github.com/gogf/gf/g"
+	"github.com/gogf/gf/frame/g"
 )
 
 func init() {
