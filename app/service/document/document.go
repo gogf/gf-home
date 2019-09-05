@@ -52,7 +52,7 @@ func SearchMdByKey(key string) []string {
 	glog.Cat("search").Println(key)
 	v := cache.GetOrSetFunc("doc_search_result_"+key, func() interface{} {
 		// 当该key的检索缓存不存在时，执行检索
-		array := garray.NewStringArray(true)
+		array := garray.NewStrArray(true)
 		docPath := g.Config().GetString("document.path")
 		paths := cache.GetOrSetFunc("doc_files_recursive", func() interface{} {
 			// 当目录列表不存在时，执行检索

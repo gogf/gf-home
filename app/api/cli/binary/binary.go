@@ -16,7 +16,7 @@ import (
 var (
 	cliRoot  = g.Config().GetString("cli.path")
 	cacheMap = gmap.NewStrStrMap(true)
-	filesSet = gset.NewStringSet(true)
+	filesSet = gset.NewStrSet(true)
 )
 
 func init() {
@@ -25,13 +25,23 @@ func init() {
 	}
 	refreshFilesSet()
 	gtimer.SetInterval(5*time.Minute, func() {
+		glog.Cat("binary").Println("start refresh")
 		refreshFilesSet()
 		refreshCacheMap()
+		glog.Cat("binary").Println("end refresh")
 	})
 }
 
 // CLI二进制文件浏览
 func Index(r *ghttp.Request) {
+	path := cliRoot + "/" + r.Get("path")
+	if gfile.IsFile(path) {
+		// 引导到CDN地址下载
+		cdnUrl := g.Config().GetString("cdn.url")
+		if cdnUrl != "" && r.Header.Get("Ali-Swift-Stat-Host") == "" {
+			r.Response.RedirectTo(fmt.Sprintf(`%s%s?%s`, cdnUrl, r.URL.Path, cacheMap.Get(gfile.RealPath(path))))
+		}
+	}
 	r.Response.ServeFile(cliRoot+"/"+r.Get("path"), true)
 }
 
@@ -77,6 +87,7 @@ func refreshFilesSet() {
 	if err != nil {
 		glog.Error(err)
 	} else {
+		filesSet.Clear()
 		filesSet.Add(files...)
 	}
 }

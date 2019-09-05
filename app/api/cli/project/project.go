@@ -22,8 +22,10 @@ func init() {
 	}
 	// 每隔5分钟刷新项目zip缓存信息
 	gtimer.SetInterval(5*time.Minute, func() {
+		glog.Cat("project").Println("start refresh")
 		refreshZipData()
 		refreshMd5Data()
+		glog.Cat("project").Println("start refresh")
 	})
 }
 

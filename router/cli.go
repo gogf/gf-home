@@ -5,15 +5,20 @@ import (
 	"github.com/gogf/gf-home/app/api/cli/project"
 	"github.com/gogf/gf-home/app/api/cli/version"
 	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/net/ghttp"
 )
 
 func init() {
-	g.Server().BindHandler("/cli/*path", binary.Index)
-	g.Server().BindHandler("/cli/binary/*path", binary.Index)
-	g.Server().BindHandler("/cli/binary/md5", binary.Md5)
-
-	g.Server().BindHandler("/cli/project/md5", project.Md5)
-	g.Server().BindHandler("/cli/project/zip", project.Zip)
-
-	g.Server().BindHandler("/cli/version", version.Latest)
+	g.Server().Group("/cli", func(g *ghttp.RouterGroup) {
+		g.GET("/*path", binary.Index)
+		g.GET("/version", version.Latest)
+		g.Group("/binary", func(g *ghttp.RouterGroup) {
+			g.GET("/*path", binary.Index)
+			g.GET("/md5", binary.Md5)
+		})
+		g.Group("/project", func(g *ghttp.RouterGroup) {
+			g.GET("/md5", project.Md5)
+			g.GET("/zip", project.Zip)
+		})
+	})
 }
