@@ -41,9 +41,9 @@ func UpdateDocGit() {
 		// 每次文档的更新都要清除缓存对象数据
 		cache.Clear()
 
-		glog.Cat("doc-hook").Printfln("doc hook updates")
+		glog.Cat("doc-hook").Printf("doc hook updates")
 	} else {
-		glog.Cat("doc-hook").Printfln("doc hook updates error: %v", err)
+		glog.Cat("doc-hook").Printf("doc hook updates error: %v", err)
 	}
 }
 

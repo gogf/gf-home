@@ -10,15 +10,15 @@ import (
 
 func init() {
 	g.Server().Group("/cli", func(g *ghttp.RouterGroup) {
-		g.GET("/*path", binary.Index)
-		g.GET("/version", version.Latest)
+		g.ALL("/*path", binary.Index)
+		g.ALL("/version", version.Latest)
 		g.Group("/binary", func(g *ghttp.RouterGroup) {
-			g.GET("/*path", binary.Index)
-			g.GET("/md5", binary.Md5)
+			g.ALL("/*path", binary.Index)
+			g.ALL("/md5", binary.Md5)
 		})
 		g.Group("/project", func(g *ghttp.RouterGroup) {
-			g.GET("/md5", project.Md5)
-			g.GET("/zip", project.Zip)
+			g.ALL("/md5", project.Md5)
+			g.ALL("/zip", project.Zip)
 		})
 	})
 }

@@ -8,8 +8,8 @@ import (
 
 func init() {
 	g.Server().Group("/", func(g *ghttp.RouterGroup) {
-		g.GET("/*path", document.Index)
-		g.GET("/hook", document.UpdateHook)
-		g.GET("/search", document.Search)
+		g.ALL("/*path", document.Index)
+		g.ALL("/hook", document.UpdateHook)
+		g.ALL("/search", document.Search)
 	})
 }
