@@ -24,8 +24,10 @@ function replaceHrefAndSrc() {
             if (href.substr(0, 7) == "mailto:") {
                 return
             }
-            if (href.substr(0, 1) != "/" && href.substr(0, 1) != "#" && href.substr(0, 4) != "http") {
-                href = "/" + href
+            if (href.substr(0, 1) != "#" && href.substr(0, 4) != "http" && href.substr(0, 10) != "javascript") {
+                if (href.substr(0, 1) != "/") {
+                    href = "/" + href;
+                }
                 if (href.indexOf(".md") != -1) {
                     href = href.replace(".md", "");
                     $(this).attr("href", "javascript:loadMarkdown('" + href + "', true);");

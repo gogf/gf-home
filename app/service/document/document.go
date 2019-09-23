@@ -17,28 +17,28 @@ import (
 )
 
 var (
-	// Markdown文件路径配置
+	// Path is the document diractory for gf-doc.
 	Path = g.Config().GetString("document.path")
 )
 
 var (
-	// 文档缓存
+	// Cache for documents.
 	cache = gcache.New()
 )
 
 func init() {
+	// Path checking..
 	if Path == "" {
 		glog.Fatal("configuration for document.path cannot be empty")
 	}
 }
 
-// 更新doc版本库
+// UpdateDocGit does the "git pull" for gf-doc.
 func UpdateDocGit() {
 	err := gproc.ShellRun(
 		fmt.Sprintf(`cd %s && git pull origin master`, Path),
 	)
 	if err == nil {
-		// 每次文档的更新都要清除缓存对象数据
 		cache.Clear()
 
 		glog.Cat("doc-hook").Printf("doc hook updates")
@@ -47,7 +47,8 @@ func UpdateDocGit() {
 	}
 }
 
-// 根据关键字进行markdown文档搜索，返回文档path列表
+// SearchMdByKey searches the markdown files with specified key
+// and returns the file list.
 func SearchMdByKey(key string) []string {
 	glog.Cat("search").Println(key)
 	v := cache.GetOrSetFunc("doc_search_result_"+key, func() interface{} {

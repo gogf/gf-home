@@ -34,7 +34,7 @@ func init() {
 
 // CLI二进制文件浏览
 func Index(r *ghttp.Request) {
-	path := cliRoot + "/" + r.Get("path")
+	path := cliRoot + "/" + r.GetString("path")
 	if gfile.IsFile(path) {
 		// 引导到CDN地址下载
 		cdnUrl := g.Config().GetString("cdn.url")
@@ -42,7 +42,7 @@ func Index(r *ghttp.Request) {
 			r.Response.RedirectTo(fmt.Sprintf(`%s%s?%s`, cdnUrl, r.URL.Path, cacheMap.Get(gfile.RealPath(path))))
 		}
 	}
-	r.Response.ServeFile(cliRoot+"/"+r.Get("path"), true)
+	r.Response.ServeFile(cliRoot+"/"+r.GetString("path"), true)
 }
 
 // 获得最新CLI工具二进制文件md5值
@@ -66,7 +66,7 @@ func buildBinaryPath(r *ghttp.Request) string {
 	if os == "windows" {
 		name += ".exe"
 	}
-	return gfile.Abs(cliRoot + "/" + r.Get("path") + fmt.Sprintf(`%s_%s/%s`, os, arch, name))
+	return gfile.Abs(cliRoot + "/" + r.GetString("path") + fmt.Sprintf(`%s_%s/%s`, os, arch, name))
 }
 
 // 刷新文件md5缓存

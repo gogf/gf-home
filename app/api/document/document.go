@@ -14,7 +14,7 @@ func Index(r *ghttp.Request) {
 		serveMarkdownAjax(r)
 		return
 	}
-	path := r.Get("path")
+	path := r.GetString("path")
 	if path == "" {
 		if r.URL.RawQuery != "" {
 			r.Response.RedirectTo("/index?" + r.URL.RawQuery)
@@ -73,6 +73,6 @@ func serveMarkdownAjax(r *ghttp.Request) {
 	r.Response.WriteJson(g.Map{
 		"code": 1,
 		"msg":  "",
-		"data": document.GetMarkdown(r.Get("path", "index")),
+		"data": document.GetMarkdown(r.GetString("path", "index")),
 	})
 }
