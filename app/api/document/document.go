@@ -4,7 +4,6 @@ import (
 	"github.com/gogf/gf-home/app/service/document"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/ghttp"
-	"github.com/gogf/gf/os/gfile"
 	"net/http"
 )
 
@@ -26,7 +25,7 @@ func Index(r *ghttp.Request) {
 	config := g.Config()
 	// 如果是静态文件请求，那么表示Web Server没有找到该文件，那么直接404，本接口不支持待后缀的静态文件处理。
 	// 由于路由规则比较宽，这里也会有未存在的静态文件请求匹配进来。
-	if gfile.Ext(path) != "" {
+	if r.IsFileRequest() {
 		r.Response.WriteStatus(http.StatusNotFound)
 		return
 	}
