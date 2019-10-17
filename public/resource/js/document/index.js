@@ -247,7 +247,7 @@ $(function() {
             $(obj).find("ul").eq(0).find(">li").each(function () {
                 $(this).find("a").each(function () {
                     var v = $(this).css("padding-left");
-                    var i = parseInt(v) + 20;
+                    var i = parseInt(v) + 15;
                     $(this).css("padding-left", i + "px");
                 });
                 if ($(this).find(">ul").length > 0) {
@@ -295,7 +295,7 @@ $(function() {
     // 菜单关闭隐藏
     $("#menu-icon").click(function () {
         if ($("#side-markdown-view").css("display") == "none") {
-            $(this).css("left", "340px");
+            $(this).css("left", "190px");
             $("#side-markdown-view").show();
         } else {
             $(this).css("left", "20px");

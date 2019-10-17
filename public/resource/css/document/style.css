@@ -253,3 +253,38 @@ li.active {
     height:30px;
     text-align: center;
 }
+
+@media (max-width: 480px) {
+    #main-markdown-view {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    #side-markdown-view {
+        font-size: 14px;
+        width: 180px;
+    }
+
+    #side-search input {
+        padding-right: 15px;
+        height: 32px;
+    }
+
+    #side-markdown-view i {
+        width: 14px;
+        padding-right: 4px;
+    }
+
+    #menu-icon {
+        font-size: 14px;
+        top: 18px;
+    }
+
+    #help-icon {
+        display: none;
+    }
+
+    .am-list-border>li>a, .am-list-bordered>li>a {
+        padding: 1rem 0;
+    }
+}
