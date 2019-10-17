@@ -295,8 +295,11 @@ $(function() {
     // 菜单关闭隐藏
     $("#menu-icon").click(function () {
         if ($("#side-markdown-view").css("display") == "none") {
-            $(this).css("left", "190px");
+            $(this).css("left", "340px");
             $("#side-markdown-view").show();
+            if ($(document).width()<=480) {
+                $(this).css("left", "190px");
+            }
         } else {
             $(this).css("left", "20px");
             $("#side-markdown-view").hide();
