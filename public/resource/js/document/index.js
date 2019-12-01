@@ -63,6 +63,20 @@ function highlightLiByUri(uri) {
     $("a[href='"+ uri +"']").parents("li").each(function(){
         openNode($(this));
     });
+
+    var menu = $("#side-markdown-view");
+    var windowHeiget = window.innerHeight;
+    var menuScrollTop = menu.scrollTop();
+    var seliTop = seli.offset().top;
+    // console.log(windowHeiget, seliTop, menuScrollTop);
+    // 将菜单滚动调整到当前页面的菜单所在位置
+    if (seliTop + 46 > windowHeiget) {
+        // 菜单所在位置在页面以下
+        menu.animate({ scrollTop: menuScrollTop + seliTop - 8 }, "slow");
+    } else if (seliTop < 0) {
+        // 菜单所在位置在页面以上
+        menu.animate({ scrollTop: menuScrollTop + seliTop - 8 }, "slow");
+    }
 }
 
 // 监听按钮事件监听
