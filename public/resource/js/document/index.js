@@ -118,6 +118,17 @@ function copyText(text) {
     currentFocus.focus();
     return flag;
 }
+// TOC事件
+function tocOn() {
+    if (navigator.userAgent.lastIndexOf("Mobile") == -1) {
+        $("div.toc").addClass("toc-pc");
+        $("div.toc").hover(function () {
+            $(this).css({ opacity: 1 });
+        }, function () {
+            $(this).css({ opacity: .2 });
+        });
+    }
+}
 // 插入代码
 function isEleExist(id) {
     if($("#"+id).length <= 0) {
@@ -186,6 +197,7 @@ function reloadMainMarkdown() {
         }
 
         copyBtnOn();
+        tocOn();
     }
     replaceHrefAndSrc();
     updateHelpUrl(window.location.pathname);
@@ -354,4 +366,6 @@ $(function() {
         $("#search-key").val("");
         $("#search-input button").trigger("click");
     });
+
+    
 });
