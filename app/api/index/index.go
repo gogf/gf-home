@@ -1,7 +1,7 @@
-package api_index
+package index
 
 import (
-	"github.com/gogf/gf/g/net/ghttp"
+	"github.com/gogf/gf/net/ghttp"
 )
 
 // 网站首页
