@@ -63,6 +63,20 @@ function highlightLiByUri(uri) {
     $("a[href='"+ uri +"']").parents("li").each(function(){
         openNode($(this));
     });
+
+    var menu = $("#side-markdown-view");
+    var windowHeiget = window.innerHeight;
+    var menuScrollTop = menu.scrollTop();
+    var seliTop = seli.offset().top;
+    // console.log(windowHeiget, seliTop, menuScrollTop);
+    // 将菜单滚动调整到当前页面的菜单所在位置
+    if (seliTop + 46 > windowHeiget) {
+        // 菜单所在位置在页面以下
+        menu.animate({ scrollTop: menuScrollTop + seliTop - 8 }, "slow");
+    } else if (seliTop < 0) {
+        // 菜单所在位置在页面以上
+        menu.animate({ scrollTop: menuScrollTop + seliTop - 8 }, "slow");
+    }
 }
 
 // 监听按钮事件监听
@@ -103,6 +117,17 @@ function copyText(text) {
     document.body.removeChild(textarea);//删除元素
     currentFocus.focus();
     return flag;
+}
+// TOC事件
+function tocOn() {
+    if (navigator.userAgent.lastIndexOf("Mobile") == -1) {
+        $("div.toc").addClass("toc-pc");
+        $("div.toc").hover(function () {
+            $(this).css({ opacity: 1 });
+        }, function () {
+            $(this).css({ opacity: .2 });
+        });
+    }
 }
 // 插入代码
 function isEleExist(id) {
@@ -172,6 +197,7 @@ function reloadMainMarkdown() {
         }
 
         copyBtnOn();
+        tocOn();
     }
     replaceHrefAndSrc();
     updateHelpUrl(window.location.pathname);
@@ -340,4 +366,6 @@ $(function() {
         $("#search-key").val("");
         $("#search-input button").trigger("click");
     });
+
+    
 });
