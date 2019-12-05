@@ -118,29 +118,7 @@ function copyText(text) {
     currentFocus.focus();
     return flag;
 }
-// TOC事件
-function tocOn() {
-    var tocDiv = $("div.toc");
-    tocDiv.attr({ "title": "右侧按钮打开/隐藏" });
-    tocDiv.addClass("toc-pc");
-    if (navigator.userAgent.lastIndexOf("Mobile") == -1) {
-        tocDiv.css({ opacity: .2 });
-        tocDiv.hover(function () {
-            $(this).css({ opacity: 1 });
-        }, function () {
-            $(this).css({ opacity: .2 });
-        });
-    }
 
-    // 目录关闭隐藏
-    $("#toc-icon").click(function () {
-        if (tocDiv.css("display") == "none") {
-            tocDiv.show();
-        } else {
-            tocDiv.hide();
-        }
-    });
-}
 // 插入代码
 function isEleExist(id) {
     if($("#"+id).length <= 0) {
@@ -187,7 +165,7 @@ function reloadMainMarkdown() {
         //用于检测代码块是否有纵向滚动条
         $(".check-scroll").each(function(){
             var ua=navigator.userAgent;
-            if(hasScrolled(this ,'vertical') && ua.search("Mobile")==-1){
+            if(hasScrolled(this ,'vertical') && ua.search("Mobile") == -1){
                 if(ua.search("Windows NT")!=-1){
                     $(this).prev().find("span").css("padding","2px 22px");
                 }else{
@@ -202,17 +180,38 @@ function reloadMainMarkdown() {
             'class'   : 'toc',
             'targetId': 'main-markdown-toc'
         } );
-        if ($('#main-markdown-toc').html().length > 0) {
-            var html = $("#main-markdown-view").html().replace("<p>[TOC]</p>", $('#main-markdown-toc').html());
-            html += $("#powered").html();
-            $("#main-markdown-view").html(html)
+        if ($('#main-markdown-toc .toc').html() == "undefined") {
+            $('#main-markdown-toc').html("");
+            hideToc()
+        } else {
+            showToc()
         }
+        // 首页不展示TOC
+        if (window.location.pathname == "/index") {
+            hideToc()
+        }
+        var html = $("#main-markdown-view").html().replace("<p>[TOC]</p>", "");
+        html += $("#powered").html();
+        $("#main-markdown-view").html(html);
 
         copyBtnOn();
-        tocOn();
     }
     replaceHrefAndSrc();
     updateHelpUrl(window.location.pathname);
+}
+
+// 显示TOC
+function showToc() {
+    $("#help-icon").css("right", "270px");
+    $("#toc-icon").css("right", "273px");
+    $("#main-markdown-toc").show();
+}
+
+// 隐藏TOC
+function hideToc() {
+    $("#help-icon").css("right", "20px");
+    $("#toc-icon").css("right", "23px");
+    $("#main-markdown-toc").hide();
 }
 
 // 更新文档markdown链接地址
@@ -338,6 +337,15 @@ $(function() {
         } else {
             $(this).css("left", "20px");
             $("#side-markdown-view").hide();
+        }
+    });
+
+    // TOC关闭隐藏
+    $("#toc-icon").click(function () {
+        if ($("#main-markdown-toc").css("display") == "none") {
+            showToc()
+        } else {
+            hideToc()
         }
     });
 

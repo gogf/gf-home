@@ -24,7 +24,7 @@ blockquote {
 #main-markdown-404 {
     text-align: center;
 }
-#main-markdown-content, main-markdown-toc {
+#main-markdown-content {
     display:none;
 }
 #menu-icon {
@@ -33,17 +33,36 @@ blockquote {
     top: 22px;
 }
 
+#main-markdown-toc {
+    display: none;
+    width: 240px;
+    padding-top: 20px;
+}
+#main-markdown-toc ul {
+    margin:0 !important;
+}
+
 #menu-icon, #menu-icon:visited {
     color: #666;
 }
 
 #help-icon {
     position: fixed;
-    right: 50px;
+    right: 270px;
     top: 22px;
 }
 
 #help-icon, #help-icon:visited {
+    color: #666;
+}
+
+#toc-icon {
+    position: fixed;
+    right: 273px;
+    top: 62px;
+}
+
+#toc-icon, #toc-icon:visited {
     color: #666;
 }
 
@@ -271,12 +290,3 @@ li.active {
     margin: 0;
 }
 
-#toc-icon {
-    position: fixed;
-    right: 52px;
-    top: 62px;
-}
-
-#toc-icon, #toc-icon:visited {
-    color: #666;
-}
