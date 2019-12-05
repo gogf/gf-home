@@ -120,14 +120,26 @@ function copyText(text) {
 }
 // TOC事件
 function tocOn() {
+    var tocDiv = $("div.toc");
+    tocDiv.attr({ "title": "右侧按钮打开/隐藏" });
+    tocDiv.addClass("toc-pc");
     if (navigator.userAgent.lastIndexOf("Mobile") == -1) {
-        $("div.toc").addClass("toc-pc");
-        $("div.toc").hover(function () {
+        tocDiv.css({ opacity: .2 });
+        tocDiv.hover(function () {
             $(this).css({ opacity: 1 });
         }, function () {
             $(this).css({ opacity: .2 });
         });
     }
+
+    // 目录关闭隐藏
+    $("#toc-icon").click(function () {
+        if (tocDiv.css("display") == "none") {
+            tocDiv.show();
+        } else {
+            tocDiv.hide();
+        }
+    });
 }
 // 插入代码
 function isEleExist(id) {
