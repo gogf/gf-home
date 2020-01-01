@@ -258,17 +258,25 @@ li.active {
 .toc-pc {
     position: fixed;
     background-color: white;
-    right: 98px;
+    right: 20px;
+    top: 400px;
     z-index: 9999;
     border-radius: 5px;
-    padding: 20px;
     border-style: solid;
     border-width: 1px;
     border-color: rgb(40, 115, 255);
+    cursor: move;
+    user-select:none;
+}
+
+.toc-pc div {
+    background-color: rgb(233, 233, 233);
+    padding: 10px;
+    border-radius: 5px 5px 0 0;
 }
   
 .toc-pc ul {
-    margin: 0;
+    margin: 10px;
 }
 
 #toc-icon {
@@ -277,6 +285,10 @@ li.active {
     top: 62px;
 }
 
-#toc-icon, #toc-icon:visited {
+#toc-icon-close {
+    float: right;
+}
+
+#toc-icon, #toc-icon:visited, #toc-icon-close {
     color: #666;
 }
