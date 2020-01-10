@@ -119,6 +119,66 @@ function copyText(text) {
     return flag;
 }
 
+// 鼠标移动对象
+function moveObj(obj){
+    var mouseStatus = "mouseup";
+    var dx,dy,or,ot;
+    obj.mousedown(function(e){
+        mouseStatus = "mousedown";
+        dx = e.pageX;
+        dy = e.pageY;
+        or = parseInt(obj.css("right"), 10);
+        ot = parseInt(obj.css("top"), 10);
+    });
+
+    $("body").mouseup(function(){
+        mouseStatus = "mouseup";
+    });
+
+    $("body").mousemove(function(e){
+        if (mouseStatus == "mousedown"){
+            var mx = or + dx - e.pageX;
+            var my = ot + e.pageY - dy;
+            if (mx >= 15){
+                obj.css({right:mx + "px"});
+            }
+            if (my >= 0){
+                obj.css({top:my + "px"});
+            }
+        }
+    });
+}
+
+// TOC事件
+function tocOn() {
+    var tocDiv = $("div.toc");
+    tocDiv.attr({ "title": "可拖动或右侧按钮打开/隐藏" });
+    tocDiv.addClass("toc-pc");
+    tocHead = $("<div>");
+    tocHead.html(`目录`);
+    closeBtn = $(`<a id="toc-icon-close" href="#"  title="关闭目录"><i class="am-close am-icon-times"></i></a>`);
+    tocHead.append(closeBtn);
+    tocDiv.prepend(tocHead);
+    moveObj(tocDiv);
+
+    // 目录关闭隐藏
+    $("#toc-icon").click(function () {
+        if (tocDiv.css("display") == "none") {
+            tocDiv.show();
+        } else {
+            tocDiv.hide();
+        }
+    });
+
+    $("#toc-icon-close").click(function () {
+        if (tocDiv.css("display") == "none") {
+            tocDiv.show();
+        } else {
+            tocDiv.hide();
+        }
+    });
+}
+
 // 插入代码
 function isEleExist(id) {
     if($("#"+id).length <= 0) {

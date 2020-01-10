@@ -2,6 +2,8 @@ package document
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/gogf/gf/container/garray"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/os/gcache"
@@ -13,7 +15,6 @@ import (
 	"github.com/gogf/gf/text/gstr"
 	"github.com/gogf/gf/util/gconv"
 	"gopkg.in/russross/blackfriday.v2"
-	"strings"
 )
 
 var (
@@ -66,7 +67,15 @@ func SearchMdByKey(key string) []string {
 			if len(content) > 0 {
 				if strings.Index(content, key) != -1 {
 					index := gstr.Replace(path, ".md", "")
-					index = gstr.Replace(index, docPath, "")
+
+					// 能同时处理绝对路径相对路径
+					index = index[strings.Index(index, docPath)+len(docPath):]
+
+					// 只能处理绝对路径
+					//index = gstr.Replace(index, docPath, "")
+
+					// 替换斜杠，修复windows下搜索失败的问题
+					index = strings.ReplaceAll(index, "\\", "/")
 					array.Append(index)
 				}
 			}
