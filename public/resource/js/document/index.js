@@ -178,7 +178,6 @@ function tocOn() {
         }
     });
 }
-
 // 插入代码
 function isEleExist(id) {
     if($("#"+id).length <= 0) {
@@ -225,7 +224,7 @@ function reloadMainMarkdown() {
         //用于检测代码块是否有纵向滚动条
         $(".check-scroll").each(function(){
             var ua=navigator.userAgent;
-            if(hasScrolled(this ,'vertical') && ua.search("Mobile") == -1){
+            if(hasScrolled(this ,'vertical') && ua.search("Mobile")==-1){
                 if(ua.search("Windows NT")!=-1){
                     $(this).prev().find("span").css("padding","2px 22px");
                 }else{
@@ -240,38 +239,17 @@ function reloadMainMarkdown() {
             'class'   : 'toc',
             'targetId': 'main-markdown-toc'
         } );
-        if ($('#main-markdown-toc .toc').html() == "undefined") {
-            $('#main-markdown-toc').html("");
-            hideToc()
-        } else {
-            showToc()
+        if ($('#main-markdown-toc').html().length > 0) {
+            var html = $("#main-markdown-view").html().replace("<p>[TOC]</p>", $('#main-markdown-toc').html());
+            html += $("#powered").html();
+            $("#main-markdown-view").html(html)
         }
-        // 首页不展示TOC
-        if (window.location.pathname == "/index") {
-            hideToc()
-        }
-        var html = $("#main-markdown-view").html().replace("<p>[TOC]</p>", "");
-        html += $("#powered").html();
-        $("#main-markdown-view").html(html);
 
         copyBtnOn();
+        tocOn();
     }
     replaceHrefAndSrc();
     updateHelpUrl(window.location.pathname);
-}
-
-// 显示TOC
-function showToc() {
-    $("#help-icon").css("right", "270px");
-    $("#toc-icon").css("right", "273px");
-    $("#main-markdown-toc").show();
-}
-
-// 隐藏TOC
-function hideToc() {
-    $("#help-icon").css("right", "20px");
-    $("#toc-icon").css("right", "23px");
-    $("#main-markdown-toc").hide();
 }
 
 // 更新文档markdown链接地址
@@ -397,15 +375,6 @@ $(function() {
         } else {
             $(this).css("left", "20px");
             $("#side-markdown-view").hide();
-        }
-    });
-
-    // TOC关闭隐藏
-    $("#toc-icon").click(function () {
-        if ($("#main-markdown-toc").css("display") == "none") {
-            showToc()
-        } else {
-            hideToc()
         }
     });
 
