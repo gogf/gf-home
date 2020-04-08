@@ -325,12 +325,6 @@ li.active {
     user-select: none;
 }
 
-@media screen and (max-width: 1023px) {
-    .toc-pc {
-        display: none;
-    }
-}
-
 .toc-pc div {
     background-color: rgb(233, 233, 233);
     padding: 10px;
@@ -348,6 +342,17 @@ li.active {
 }
 
 @media screen and (max-width: 1023px) {
+    .toc-pc {
+        top: unset;
+        bottom: 20px;
+        display: none;
+    }
+
+    .toc-pc > ul {
+        height: 250px;
+        overflow: scroll;
+    }
+
     #toc-icon {
         right: 23px;
         top: 102px;
