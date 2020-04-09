@@ -315,14 +315,16 @@ li.active {
     position: fixed;
     background-color: white;
     right: 20px;
-    top: 400px;
+    bottom: 5%;
     z-index: 9999;
     border-radius: 5px;
     border-style: solid;
     border-width: 1px;
-    border-color: rgb(40, 115, 255);
+    border-color: #aaa;
     cursor: move;
     user-select: none;
+    min-width: 220px;
+    min-height: 300px;
 }
 
 .toc-pc div {
