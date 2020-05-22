@@ -54,13 +54,15 @@ func SearchMdByKey(key string) []string {
 	glog.Cat("search").Println(key)
 	v := cache.GetOrSetFunc("doc_search_result_"+key, func() interface{} {
 		// 当该key的检索缓存不存在时，执行检索
-		array := garray.NewStrArray(true)
-		docPath := g.Config().GetString("document.path")
-		paths := cache.GetOrSetFunc("doc_files_recursive", func() interface{} {
-			// 当目录列表不存在时，执行检索
-			paths, _ := gfile.ScanDir(docPath, "*.md", true)
-			return paths
-		}, 0)
+		var (
+			array   = garray.NewStrArray(true)
+			docPath = g.Config().GetString("document.path")
+			paths   = cache.GetOrSetFunc("doc_files_recursive", func() interface{} {
+				// 当目录列表不存在时，执行检索
+				paths, _ := gfile.ScanDir(docPath, "*.md", true)
+				return paths
+			}, 0)
+		)
 		// 遍历markdown文件列表，执行字符串搜索
 		for _, path := range gconv.Strings(paths) {
 			content := gfcache.GetContents(path)

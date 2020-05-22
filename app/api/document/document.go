@@ -30,8 +30,10 @@ func Index(r *ghttp.Request) {
 		return
 	}
 	// 菜单内容
-	baseTitle := config.GetString("document.title")
-	title := document.GetTitleByPath(path)
+	var (
+		title     = document.GetTitleByPath(path)
+		baseTitle = config.GetString("document.title")
+	)
 	if title == "" {
 		title = "404 NOT FOUND"
 	}
