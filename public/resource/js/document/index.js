@@ -1,4 +1,6 @@
 var currentUri = window.location.pathname;
+// 菜单列表，用于提取上下节地址
+var menuList = new Array();
 
 // 返回/前进浏览器事件
 window.onpopstate = function() {
@@ -77,6 +79,35 @@ function highlightLiByUri(uri) {
         // 菜单所在位置在页面以上
         menu.animate({ scrollTop: menuScrollTop + seliTop - 8 }, "slow");
     }
+}
+
+// 显示上一节下一节
+function showPrevAndNextSection(uri) {
+    menuList.forEach(function (val, index) {
+        if (val.path == uri) {
+            var prev = index - 1;
+            var next = index + 1;
+            var prevEle = $("#section-prev");
+            var nextEle = $("#section-next");
+
+            if (menuList[prev] != undefined) {
+                prevEle.text("上一节：" + menuList[prev].name);
+                prevEle.attr("href", menuList[prev].path);
+            } else {
+                prevEle.text("上一节：无");
+                prevEle.attr("href", "#");
+            }
+
+            if (menuList[next] != undefined) {
+                nextEle.text("下一节：" + menuList[next].name);
+                nextEle.attr("href", menuList[next].path);
+            } else {
+                nextEle.text("下一节：无");
+                nextEle.attr("href", "#");
+            }
+
+        }
+    });
 }
 
 // 监听按钮事件监听
@@ -337,6 +368,16 @@ $(function() {
     $("#side-markdown-view").find("ul").eq(0).find(">li").each(function(){
         indentTreeByLi(this)
     });
+
+    // 转存菜单数据
+    $("#side-markdown-view").find("li").each(function (params) {
+        var thisPath = $(this).find("a").eq(0).attr('href');
+        var thisName = $(this).find("a").eq(0).text();
+        if (thisPath != "#") {
+            menuList.push({ "name": thisName, "path": thisPath });
+        }
+    });
+
     // 绑定li点击事件
     $("#side-markdown-view").find("li").click(function(){
         if ($(this).find("ul").length > 0) {
@@ -348,7 +389,9 @@ $(function() {
                 $(this).find("i").eq(0).attr("class", "am-icon-caret-down");
             }
         } else {
-            loadMarkdown($(this).find("a").eq(0).attr('href'), true)
+            var thisPath = $(this).find("a").eq(0).attr('href');
+            loadMarkdown(thisPath, true);
+            showPrevAndNextSection(thisPath);
         }
         return false
     });
@@ -366,6 +409,7 @@ $(function() {
     // });
     // 高亮并展开当前打开的地址
     highlightLiByUri(window.location.pathname);
+    showPrevAndNextSection(window.location.pathname);
 
     $("#process-mask").hide();
 
