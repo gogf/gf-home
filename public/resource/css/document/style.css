@@ -1,7 +1,8 @@
 /* common */
 .container {
-    display:flex;
+    display: flex;
 }
+
 .markdown-body a {
     color: #4183c4;
 }
@@ -21,16 +22,31 @@ blockquote {
     display: none;
 }
 
+@media screen and (max-width: 1023px) {
+    #totop-icon {
+        right: 21px !important;
+    }
+}
+
 #main-markdown-404 {
     text-align: center;
 }
+
 #main-markdown-content, main-markdown-toc {
-    display:none;
+    display: none;
 }
+
 #menu-icon {
     position: fixed;
     left: 340px;
     top: 22px;
+}
+
+@media screen and (max-width: 1023px) {
+    #menu-icon {
+        left: unset !important;
+        right: 20px !important;
+    }
 }
 
 #menu-icon, #menu-icon:visited {
@@ -41,6 +57,13 @@ blockquote {
     position: fixed;
     right: 50px;
     top: 22px;
+}
+
+@media screen and (max-width: 1023px) {
+    #help-icon {
+        right: 21px;
+        top: 62px;
+    }
 }
 
 #help-icon, #help-icon:visited {
@@ -54,8 +77,8 @@ blockquote {
 .ui.dimmer {
     display: block;
     position: absolute;
-    top: 0!important;
-    left: 0!important;
+    top: 0 !important;
+    left: 0 !important;
     width: 100%;
     height: 100%;
     text-align: center;
@@ -75,10 +98,11 @@ blockquote {
     border: 5px solid #BEBEBE;
     border-left: 5px solid #498aca;
     animation: load 1s linear infinite;
-    -moz-animation:load 1s linear infinite;
+    -moz-animation: load 1s linear infinite;
     -webkit-animation: load 1s linear infinite;
-    -o-animation:load 1s linear infinite;
+    -o-animation: load 1s linear infinite;
 }
+
 .loading-small {
     width: 20px;
     height: 20px;
@@ -88,24 +112,36 @@ blockquote {
     border: 5px solid #BEBEBE;
     border-left: 5px solid #498aca;
     animation: load 1s linear infinite;
-    -moz-animation:load 1s linear infinite;
+    -moz-animation: load 1s linear infinite;
     -webkit-animation: load 1s linear infinite;
-    -o-animation:load 1s linear infinite;
+    -o-animation: load 1s linear infinite;
 }
-@-webkit-keyframes load
-{
-    from{-webkit-transform:rotate(0deg);}
-    to{-webkit-transform:rotate(360deg);}
+
+@-webkit-keyframes load {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
 }
-@-moz-keyframes load
-{
-    from{-moz-transform:rotate(0deg);}
-    to{-moz-transform:rotate(360deg);}
+
+@-moz-keyframes load {
+    from {
+        -moz-transform: rotate(0deg);
+    }
+    to {
+        -moz-transform: rotate(360deg);
+    }
 }
-@-o-keyframes load
-{
-    from{-o-transform:rotate(0deg);}
-    to{-o-transform:rotate(360deg);}
+
+@-o-keyframes load {
+    from {
+        -o-transform: rotate(0deg);
+    }
+    to {
+        -o-transform: rotate(360deg);
+    }
 }
 
 li.active {
@@ -114,53 +150,66 @@ li.active {
 }
 
 .markdown-toc-list {
-    font-size:16px;
+    font-size: 16px;
 }
 
-.markdown-body pre>code {
-    font-size:14px;
+.markdown-body pre > code {
+    font-size: 14px;
 }
 
 /* side */
 #side-markdown-view {
-    font-size:16px;
+    font-size: 16px;
     width: 320px;
     border-right: 1px solid #ddd;
     height: 100vh;
-    display:flex;
+    display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     transition: left .25s ease;
     overflow: auto;
-    padding:10px;
+    padding: 10px;
     padding-bottom: 150px;
+}
+
+@media screen and (max-width: 1023px) {
+    #side-markdown-view {
+        width: 250px;
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+        background-color: #ffffff;
+    }
 }
 
 #side-markdown-view ul {
     list-style: none;
-    margin:0;
+    margin: 0;
 }
 
 #side-search {
-    height:45px;
+    height: 45px;
 }
 
 #side-search input {
     border-radius: 4px;
-    padding-left:35px;
+    padding-left: 35px;
     padding-right: 35px;
-    height:37px;
+    height: 37px;
 }
 
 #search-loading {
-    display:none;
+    display: none;
 }
+
 #search-loading .loading-small {
-    margin-left:90px;
+    margin-left: 90px;
 }
 
 #search-input button {
-    color:#666;
+    color: #666;
     font-size: 13px;
     position: relative;
     left: 4px;
@@ -176,7 +225,7 @@ li.active {
 
 #clear-button button {
     display: none;
-    color:#666;
+    color: #666;
     font-size: 10px;
     position: relative;
     right: 5px;
@@ -190,13 +239,13 @@ li.active {
     background-color: #fafafa;
     padding-left: 0 !important;
     line-height: 1.4285em;
-    color: rgba(0,0,0,.87);
-    border:0;
+    color: rgba(0, 0, 0, .87);
+    border: 0;
 }
 
 #side-markdown-view li {
-    border-bottom:0;
-    border-left:0;
+    border-bottom: 0;
+    border-left: 0;
     border-right: 0;
     border-top: 1px solid #dedede;
 }
@@ -207,12 +256,18 @@ li.active {
 
 /*  main */
 #main-markdown-view {
-    font-size:16px;
+    font-size: 16px;
     transition: left .25s ease;
-    flex:1;
+    flex: 1;
     height: 100vh;
     padding: 20px 80px 10px 80px;
     overflow: auto;
+}
+
+@media screen and (max-width: 1023px) {
+    #main-markdown-view {
+        padding: 20px;
+    }
 }
 
 #main-markdown-view img {
@@ -232,6 +287,7 @@ li.active {
 #side-markdown-view a, #side-markdown-view a:visited {
     color: #555;
 }
+
 #side-markdown-view a:hover {
     color: #555;
     border-bottom: 0;
@@ -248,9 +304,9 @@ li.active {
 
 /* bottom */
 #powered-bottom {
-    font-size:14px;
-    margin:100px 0 20px 0;
-    height:30px;
+    font-size: 14px;
+    margin: 100px 0 20px 0;
+    height: 30px;
     text-align: center;
 }
 
@@ -259,14 +315,17 @@ li.active {
     position: fixed;
     background-color: white;
     right: 20px;
-    top: 400px;
+    bottom: 5%;
     z-index: 9999;
     border-radius: 5px;
     border-style: solid;
     border-width: 1px;
-    border-color: rgb(40, 115, 255);
+    border-color: #aaa;
     cursor: move;
-    user-select:none;
+    user-select: none;
+    min-width: 220px;
+    min-height: 300px;
+    overflow: auto;
 }
 
 .toc-pc div {
@@ -274,7 +333,7 @@ li.active {
     padding: 10px;
     border-radius: 5px 5px 0 0;
 }
-  
+
 .toc-pc ul {
     margin: 10px;
 }
@@ -283,6 +342,24 @@ li.active {
     position: fixed;
     right: 52px;
     top: 62px;
+}
+
+@media screen and (max-width: 1023px) {
+    .toc-pc {
+        top: unset;
+        bottom: 20px;
+        display: none;
+    }
+
+    .toc-pc > ul {
+        height: 250px;
+        overflow: scroll;
+    }
+
+    #toc-icon {
+        right: 23px;
+        top: 102px;
+    }
 }
 
 #toc-icon-close {

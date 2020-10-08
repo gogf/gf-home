@@ -25,10 +25,8 @@ func init() {
 	}
 	refreshFilesSet()
 	gtimer.SetInterval(5*time.Minute, func() {
-		glog.Cat("binary").Println("start refresh")
 		refreshFilesSet()
 		refreshCacheMap()
-		glog.Cat("binary").Println("end refresh")
 	})
 }
 
@@ -37,12 +35,18 @@ func Index(r *ghttp.Request) {
 	path := cliRoot + "/" + r.GetString("path")
 	if gfile.IsFile(path) {
 		// 引导到CDN地址下载
-		cdnUrl := g.Config().GetString("cdn.url")
-		if cdnUrl != "" && r.Header.Get("Ali-Swift-Stat-Host") == "" {
-			r.Response.RedirectTo(fmt.Sprintf(`%s%s?%s`, cdnUrl, r.URL.Path, cacheMap.Get(gfile.RealPath(path))))
+		if cdnUrl := g.Config().GetString("cdn.url"); cdnUrl != "" {
+			r.Response.RedirectTo(
+				fmt.Sprintf(
+					`%s%s?%s`,
+					cdnUrl,
+					r.URL.Path,
+					cacheMap.Get(gfile.RealPath(path)),
+				),
+			)
 		}
 	}
-	r.Response.ServeFile(cliRoot+"/"+r.GetString("path"), true)
+	r.Response.ServeFile(cliRoot+"/"+path, true)
 }
 
 // 获得最新CLI工具二进制文件md5值
@@ -60,13 +64,16 @@ func Md5(r *ghttp.Request) {
 
 // 根据请求参数
 func buildBinaryPath(r *ghttp.Request) string {
-	os := r.Get("os")
-	arch := r.Get("arch")
-	name := "gf"
+	var (
+		os   = r.Get("os")
+		arch = r.Get("arch")
+		path = r.GetString("path")
+		name = "gf"
+	)
 	if os == "windows" {
 		name += ".exe"
 	}
-	return gfile.Abs(cliRoot + "/" + r.GetString("path") + fmt.Sprintf(`%s_%s/%s`, os, arch, name))
+	return gfile.Abs(cliRoot + "/" + path + fmt.Sprintf(`%s_%s/%s`, os, arch, name))
 }
 
 // 刷新文件md5缓存

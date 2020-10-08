@@ -250,6 +250,8 @@ function reloadMainMarkdown() {
     }
     replaceHrefAndSrc();
     updateHelpUrl(window.location.pathname);
+    // TOC浮动框高度不变
+    $(".toc-pc").css("height", $(".toc-pc").css("height"));
 }
 
 // 更新文档markdown链接地址
