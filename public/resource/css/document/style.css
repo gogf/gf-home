@@ -315,7 +315,7 @@ li.active {
     position: fixed;
     background-color: white;
     right: 20px;
-    bottom: 5%;
+    bottom: 8%;
     z-index: 9999;
     border-radius: 5px;
     border-style: solid;
