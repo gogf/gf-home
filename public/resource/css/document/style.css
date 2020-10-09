@@ -369,3 +369,19 @@ li.active {
 #toc-icon, #toc-icon:visited, #toc-icon-close {
     color: #666;
 }
+
+/* section */
+#section-bottom {
+    font-size: 14px;
+    margin: 50px 0 20px 0;
+    height: 30px;
+    text-align: center;
+}
+
+#section-prev {
+    float: left;
+}
+
+#section-next {
+    float: right;
+}
