@@ -1,6 +1,6 @@
 # GoFrame
 <div align=center>
-    <img src="https://goframe.org/logo.png" width="200"/>
+    <img src="https://goframe.org/download/thumbnails/3670188/logo.png" width="150"/>
 </div>
 
 ## GoFrame Repository
